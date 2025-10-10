@@ -1,6 +1,6 @@
 from __future__ import annotations
 from string import whitespace
-from typing import Tuple, Set
+from typing import List, Tuple, Union, Type
 from enum import Enum
 import os
 import sys
@@ -16,7 +16,7 @@ class PostData:
         after_number = "".join(line.split(". ")[1:])
         no_spaces = "".join(filter(lambda c : c not in whitespace, after_number))
         data = no_spaces.split(",")
-        post_data = (float(data[0]), float(data[1]), float(data[2]), *data[3:])
+        post_data = (float(data[0]), float(data[1]), float(data[2]), data[3], data[4])
         return post_data
     
     def get_type(self) -> Postages:
@@ -32,6 +32,7 @@ class PostData:
                     return SpecialPostages.LARGE_PACKAGE
                 else:
                     return SpecialPostages.UNMAILABLE
+        return SpecialPostages.UNMAILABLE
     
     def get_zone_dist(self) -> int:
         """
@@ -107,12 +108,12 @@ class Postage:
 
 class Postages(Enum):
     @classmethod
-    def all(cls) -> list["Postages"]:
+    def all(cls) -> List["Postages"]:
         return list(dict(vars(cls)["_member_map_"]).values())
     
     @classmethod
-    def all_posts(cls) -> list["Postages"]:
-        sub_classes : list["Postages"] = [BasicPostages, SpecialPostages]
+    def all_posts(cls) -> List["Postages"]:
+        sub_classes : List[Type[Union[BasicPostages, SpecialPostages]]] = [BasicPostages, SpecialPostages]
         
         all = []
         for post_type in sub_classes:
@@ -132,7 +133,7 @@ class SpecialPostages(Postages):
     LARGE_PACKAGE = 1
     UNMAILABLE = 2
 
-def read_lines(file_name : str) -> list[str]:
+def read_lines(file_name : str) -> List[str]:
     with open(file_name) as file:
         content = file.read()
     return content.splitlines()
@@ -142,7 +143,7 @@ def process_file(file_name : str) -> None:
         cost = PostData(line).get_cost()
         print(f"{i+1}. {cost:.2f}")
 
-def main(argv : list[str]) -> None:
+def main(argv : List[str]) -> None:
     if len(argv) <= 1:
         print(f"Usage:\npython {os.path.basename(__file__)} <input file>")
     else:
