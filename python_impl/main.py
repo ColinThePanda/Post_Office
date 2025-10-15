@@ -29,7 +29,7 @@ class PostData:
                 if post.value.is_valid(self):
                     return post
             else:
-                girth = 2 * self.height + 2 * self.thickness
+                girth = 2 * self.height + 2 * self.length
                 if ibetween(girth, Size(0, 84)):
                     return SpecialPostages.PACKAGE
                 elif ibetween(girth, Size(84, 130)):

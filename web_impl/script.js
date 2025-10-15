@@ -133,17 +133,15 @@ function classyify(data) {
   for (const [name, type] of Object.entries(PostTypes)) {
     if (type.min_size && type.max_size) {
       let between = size.between(type.min_size, type.max_size);
-      console.log(`Checking ${name}: Between [${between}]`);
       if (between === true) {
         const matchedTypeName = Object.keys(PostTypes).find(
           (key) => PostTypes[key] === type
         );
-        console.log(`Matched type: ${matchedTypeName}`);
         return type;
       }
     }
   }
-  let girth = 2 * data.height + 2 * data.thickness;
+  let girth = 2 * data.height + 2 * data.length;
   if (girth >= 0 && girth <= 84) {
     return PostTypes.REGULAR_PACKAGE;
   } else if (girth > 84 && girth <= 130) {
@@ -172,7 +170,6 @@ function handleSubmit() {
     document.getElementById("end_zip"),
   ];
   for (const [index, part] of data_parts.entries()) {
-    console.log(part, index);
     if (part === null) {
       return;
     }
@@ -186,31 +183,35 @@ function handleSubmit() {
     data_parts[index] = value;
   }
 
-  console.log(data_parts);
-
   let post_data = new PostData(data_parts);
   console.log(
     `Length: ${post_data.length}\nHeight: ${post_data.height}\nThickness: ${post_data.thickness}\nStart Zip: ${post_data.start_zip}\nEnd Zip: ${post_data.end_zip}`
   );
   let post_type = classyify(post_data);
-  let cost = getCost(post_data);
 
   let add_html = `
-    <br />
-    <br />
-    <div class="section">
-      <div class="results-container">
-        <div class="result-div">
-          <h2>Post Type:<br />${post_type.name}<br /></h2>
-        </div>
-        <div class="result-div">
-          <h2>Cost:<br />$${getCost(post_data)}</h2>
-        </div>
-      </div>
+    <div class="results-container">
+    <div class="result-div">
+        <h2>Post Type:<br />${post_type.name}<br /></h2>
+    </div>
+    <div class="result-div">
+        <h2>Cost:<br />$${getCost(post_data).toFixed(2)}</h2>
+    </div>
     </div>
   `;
 
-  document.body.insertAdjacentHTML("beforeend", add_html);
+  let add_div = document.getElementById("selection-container");
+
+  if (add_div === null) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<br />
+    <br />
+    <div class="section" id="selection-container">${add_html}</div>`
+    );
+  } else {
+    add_div.innerHTML = add_html;
+  }
 }
 
 const button = getElement("submit");
