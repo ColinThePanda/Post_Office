@@ -1,0 +1,100 @@
+/* Dark Theme Style */
+body {
+  background-color: #121212;
+  color: #f1f1f1;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #00b0b0;
+  font-size: 10rem;
+}
+
+p {
+  font-size: 2rem;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+
+  width: 90vw;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section {
+  width: 90vw;
+  max-width: 900px;
+  margin: 0 auto;
+
+  background-color: #14161d;
+  border-radius: 1rem;
+  border: 2px solid #0cc2c2;
+  padding: 1.5rem;
+  box-shadow: 0 0 8px 8px #00000079;
+}
+
+.results-container {
+  display: flex;
+  justify-content: space-between; /* Pushes the two children to opposite sides */
+  align-items: flex-start; /* Aligns them to the top */
+  width: 90vw; /* Example width for context */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.result-div {
+  display: flex;
+  justify-content: space-between; /* Pushes h2 and span to opposite sides */
+  width: 45%; /* Set a width to control the size */
+  padding: 1rem;
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-div h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.5;
+}
+
+input[type="text"],
+input[type="number"] {
+  flex: 1 1 200px;
+  min-width: 0;
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+
+  height: 3rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #444;
+  background-color: #2a2a2a;
+  color: #fff;
+
+  margin: 0;
+  max-height: none;
+}
+
+button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: rgb(33, 84, 227);
+}

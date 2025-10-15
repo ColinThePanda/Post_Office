@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Post Office</title>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
     <h1>Post Office</h1>
-    <p>This is a basic paragraph in the body of the HTML document.</p>
-    <input type="text" id="length" placeholder="Length"/>
-    <input type="text" id="height" placeholder="Height"/>
-    <input type="text" id="thickness" placeholder="Thickness"/>
-    <input type="text" id="start_zip" placeholder="Start Zip"/>
-    <input type="text" id="end_zip" placeholder="End Zip"/>
 
-    <button id="submit">Submit Info</button>
+    <div class="section">
+      <p>
+        Input the data into the boxes below and click submit to calculate the
+        cost of the package
+      </p>
+      <div class="inputs">
+        <input type="text" id="length" placeholder="Length" />
+        <input type="text" id="height" placeholder="Height" />
+        <input type="text" id="thickness" placeholder="Thickness" />
+        <input type="text" id="start_zip" placeholder="Start Zip" />
+        <input type="text" id="end_zip" placeholder="End Zip" />
+      </div>
+
+      <button id="submit">Submit Info</button>
+    </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
