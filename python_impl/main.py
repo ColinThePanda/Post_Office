@@ -29,7 +29,7 @@ class PostData:
                 if post.value.is_valid(self):
                     return post
             else:
-                girth = 2 * self.height + 2 * self.length
+                girth = 2 * self.height + 2 * self.length + 2 * self.thickness
                 if ibetween(girth, Size(0, 84)):
                     return SpecialPostages.PACKAGE
                 elif ibetween(girth, Size(84, 130)):
@@ -66,7 +66,7 @@ class PostData:
 
         return abs(from_part - to_part)
 
-    def get_cost(self) -> float:
+    def get_cost(self) -> Union[float, str]:
         type_cost_map = {
             BasicPostages.REGULAR_CARD: 0.20,
             BasicPostages.LARGE_CARD: 0.37,
@@ -87,6 +87,9 @@ class PostData:
 
         dist = self.get_zone_dist()
         type = self.get_type()
+        
+        if type == SpecialPostages.UNMAILABLE:
+            return "UNMAILABLE"
 
         return type_cost_map[type] + zone_cost_map[type] * dist
 
@@ -154,16 +157,19 @@ def read_lines(file_name: str) -> List[str]:
 def process_file(file_name: str) -> None:
     for i, line in enumerate(read_lines(file_name)):
         cost = PostData(line).get_cost()
-        print(f"{i+1}. {cost:.2f}")
+        if isinstance(cost, float):
+            print(f"{i+1}. {cost:.2f}")
+        else:
+            print(f"{i+1}. {cost}")
 
 
-def main(argv: List[str]) -> None:
-    if len(argv) <= 1:
+def main() -> None:
+    if len(sys.argv) <= 1:
         print(f"Usage:\npython {os.path.basename(__file__)} <input file>")
     else:
-        file_name = argv[1]
+        file_name = sys.argv[1]
         process_file(file_name)
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()

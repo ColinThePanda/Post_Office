@@ -1,11 +1,3 @@
-function getElement(id) {
-  const element = document.getElementById(id);
-  if (element !== null) {
-    return element;
-  }
-  throw new Error(`Id not found ${id}`);
-}
-
 class PostSize {
   constructor(length, height, thickness) {
     this.length = length;
@@ -141,7 +133,7 @@ function classyify(data) {
       }
     }
   }
-  let girth = 2 * data.height + 2 * data.length;
+  let girth = 2 * data.height + 2 * data.length + 2 * data.thickness;
   if (girth >= 0 && girth <= 84) {
     return PostTypes.REGULAR_PACKAGE;
   } else if (girth > 84 && girth <= 130) {
@@ -214,5 +206,8 @@ function handleSubmit() {
   }
 }
 
-const button = getElement("submit");
-button.addEventListener("click", handleSubmit);
+const button = document.getElementById("submit");
+  if (element !== null) {
+    button.addEventListener("click", handleSubmit);;
+  }
+  throw new Error(`Id not found ${id}`);
