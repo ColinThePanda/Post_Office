@@ -181,7 +181,18 @@ function handleSubmit() {
   );
   let post_type = classyify(post_data);
 
-  let add_html = `
+  let add_html = "";
+
+  if (post_type == PostTypes.UNMAILABLE) {
+    add_html = `
+        <div class="results-container">
+        <div class="result-div">
+            <h2>Post Type:<br />${post_type.name}<br /></h2>
+        </div>
+        </div>
+      `;
+  } else {
+    add_html = `
     <div class="results-container">
     <div class="result-div">
         <h2>Post Type:<br />${post_type.name}<br /></h2>
@@ -191,6 +202,7 @@ function handleSubmit() {
     </div>
     </div>
   `;
+  }
 
   let add_div = document.getElementById("selection-container");
 
@@ -207,7 +219,8 @@ function handleSubmit() {
 }
 
 const button = document.getElementById("submit");
-  if (element !== null) {
-    button.addEventListener("click", handleSubmit);;
-  }
-  throw new Error(`Id not found ${id}`);
+if (button !== null) {
+  button.addEventListener("click", handleSubmit);
+} else {
+  throw new Error(`Submit button not found`);
+}

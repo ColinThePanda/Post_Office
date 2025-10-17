@@ -53,7 +53,7 @@ p {
 .result-div {
   display: flex;
   justify-content: space-between; /* Pushes h2 and span to opposite sides */
-  width: 45%; /* Set a width to control the size */
+  width: 95%; /* Set a width to control the size */
   padding: 1rem;
   border-radius: 1rem;
   align-items: center;
