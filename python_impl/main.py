@@ -134,7 +134,6 @@ class Postages(Enum):
                 all.append(post)
         return all
 
-
 class BasicPostages(Postages):
     REGULAR_CARD = Postage(Size(3.5, 4.25), Size(3.5, 6), Size(0.007, 0.016))
     LARGE_CARD = Postage(Size(4.25, 6), Size(6, 11.5), Size(0.007, 0.015))
@@ -158,9 +157,9 @@ def process_file(file_name: str) -> None:
     for i, line in enumerate(read_lines(file_name)):
         cost = PostData(line).get_cost()
         if isinstance(cost, float):
-            print(f"{i+1}. {cost:.2f}")
+            print(f"{i+1}.{" " * (len(str(len(read_lines(file_name)))) - len(str(i+1)) + 1)}{cost:.2f}") # Num spaces to allign
         else:
-            print(f"{i+1}. {cost}")
+            print(f"{i+1}.{" " * (len(str(len(read_lines(file_name))))  - len(str(i+1)) + 1)}{cost}")
 
 
 def main() -> None:
