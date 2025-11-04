@@ -44,7 +44,7 @@ class Zip {
       from = 6;
     } else {
       alert("Start zip must be between 1 and 99,999");
-      return;
+      return null;
     }
     if (between(this.end_zip, 1, 6999)) {
       end = 1;
@@ -60,7 +60,7 @@ class Zip {
       end = 6;
     } else {
       alert("End zip must be between 1 and 99,999");
-      return;
+      return null;
     }
     return Math.abs(from - end);
   }
@@ -147,6 +147,9 @@ function getCost(data) {
   let post_type = classyify(data);
   let zip = new Zip(data.start_zip, data.end_zip);
   let distance = zip.size();
+  if (distance === null) {
+    return null;
+  }
   if (post_type === PostTypes.UNMAILABLE) {
     return -1;
   }
@@ -181,6 +184,12 @@ function handleSubmit() {
   );
   let post_type = classyify(post_data);
 
+  let cost = getCost(post_data);
+
+  if (cost === null) {
+    return;
+  }
+
   let add_html = "";
 
   if (post_type == PostTypes.UNMAILABLE) {
@@ -198,7 +207,7 @@ function handleSubmit() {
         <h2>Post Type:<br />${post_type.name}<br /></h2>
     </div>
     <div class="result-div">
-        <h2>Cost:<br />$${getCost(post_data).toFixed(2)}</h2>
+        <h2>Cost:<br />$${cost.toFixed(2)}</h2>
     </div>
     </div>
   `;
