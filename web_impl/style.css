@@ -1,4 +1,3 @@
-/* Dark Theme Style */
 body {
   background-color: #121212;
   color: #f1f1f1;
@@ -9,7 +8,7 @@ body {
 
 h1 {
   color: #00b0b0;
-  font-size: 10rem;
+  font-size: 9.5rem;
   font-weight: 900;
 }
 
@@ -43,17 +42,17 @@ p {
 
 .results-container {
   display: flex;
-  justify-content: space-between; /* Pushes the two children to opposite sides */
-  align-items: flex-start; /* Aligns them to the top */
-  width: 90vw; /* Example width for context */
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90vw;
   max-width: 900px;
   margin: 0 auto;
 }
 
 .result-div {
   display: flex;
-  justify-content: space-between; /* Pushes h2 and span to opposite sides */
-  width: 95%; /* Set a width to control the size */
+  justify-content: space-between;
+  width: 95%;
   padding: 1rem;
   border-radius: 1rem;
   align-items: center;
