@@ -1,3 +1,15 @@
+/*
+Post Office
+
+Website that takes in length, height, thickness, start zip, and end_zip,
+and shows postage type and cost
+
+Colin Politi
+
+Log:
+v1.0 - 11/4/25 - CP
+*/
+
 class PostSize {
   constructor(length, height, thickness) {
     this.length = length;

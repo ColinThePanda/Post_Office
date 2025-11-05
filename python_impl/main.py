@@ -1,3 +1,14 @@
+"""
+Post Office
+
+CLI application that takes in an input file of postage data and prints the cost
+
+Colin Politi
+
+Log:
+v1.0 - 10/10/25 - CP
+"""
+
 from __future__ import annotations
 from string import whitespace
 from typing import List, Tuple, Union, Type
@@ -28,9 +39,7 @@ class PostData:
         Args:
             line (str): Input line for data to be extracted from
         """
-        self.length, self.height, self.thickness, self.start_zip, self.end_zip = (
-            self.extract_line_data(line)
-        )
+        self.length, self.height, self.thickness, self.start_zip, self.end_zip = self.extract_line_data(line)
 
     def extract_line_data(self, line: str) -> Tuple[float, float, float, str, str]:
         """Extracts the numbers from an input line
@@ -86,9 +95,7 @@ class PostData:
         sizes = [s1, s2, s3, s4, s5, s6]
 
         try:
-            from_part = [ibetween(int(self.start_zip), size) for size in sizes].index(
-                True
-            )
+            from_part = [ibetween(int(self.start_zip), size) for size in sizes].index(True)
         except ValueError:
             raise ValueError("Starting zip-code is invalid") from None
         try:
@@ -238,7 +245,7 @@ def read_lines(file_name: str) -> List[str]:
 
 
 def process_file(file_name: str) -> None:
-    """Gets postage cost for each line in file 
+    """Gets postage cost for each line in file
 
     Args:
         file_name (str): name of input file
@@ -246,14 +253,10 @@ def process_file(file_name: str) -> None:
     lines = read_lines(file_name)
     for i, line in enumerate(lines):
         cost = PostData(line).get_cost()
-        if isinstance(cost, float): # Print rounded to 2 decimal places if num else just print
-            print(
-                f"{i+1}.{" " * (len(str(len(lines))) - len(str(i+1)) + 1)}{cost:.2f}"
-            )  # Num spaces to allign
+        if isinstance(cost, float):  # Print rounded to 2 decimal places if num else just print
+            print(f"{i+1}.{" " * (len(str(len(lines))) - len(str(i+1)) + 1)}{cost:.2f}")  # Num spaces to allign
         else:
-            print(
-                f"{i+1}.{" " * (len(str(len(lines)))  - len(str(i+1)) + 1)}{cost}"
-            )
+            print(f"{i+1}.{" " * (len(str(len(lines)))  - len(str(i+1)) + 1)}{cost}")
 
 
 def main() -> None:
